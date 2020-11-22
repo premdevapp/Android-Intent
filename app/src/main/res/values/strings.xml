@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ActivityLifeCycleLesson</string>
+    <string name="placeLink">Guess The Name</string>
+    <string name="add_guess">Guess a name</string>
+</resources>
