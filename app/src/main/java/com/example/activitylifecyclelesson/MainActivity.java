@@ -1,5 +1,6 @@
 package com.example.activitylifecyclelesson;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button showGuessButton;
     private EditText showPersonName;
+    private final int  REQUEST_CODE = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==REQUEST_CODE){
+            if(resultCode==RESULT_OK){
+                assert data != null;
+                String message = data.getStringExtra("message");
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
     public void onClick(View v) {
 
         String guess = showPersonName.getText().toString().trim();
@@ -38,7 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("name", "Premnath");
             intent.putExtra("age", 29);
 
-            startActivity(intent);
+            //startActivity(intent);
+
+            startActivityForResult(intent, REQUEST_CODE);
+
         }else {
             Toast.makeText(MainActivity.this, "Enter Something to Procced", Toast.LENGTH_LONG).show();
         }

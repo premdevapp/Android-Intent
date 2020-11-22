@@ -2,8 +2,10 @@ package com.example.activitylifecyclelesson;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 public class ShowGuess extends AppCompatActivity {
@@ -28,6 +30,16 @@ public class ShowGuess extends AppCompatActivity {
             Log.d("Stuff", " "+ extra.getInt("age"));
             showGuessTextView.setText(extra.getString("guess"));
         }
+
+        showGuessTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                intent.putExtra("message", "From ShowGuess Actiity");
+                setResult(RESULT_OK,intent);
+                finish();
+            }
+        });
 
     }
 }
